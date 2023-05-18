@@ -4,18 +4,14 @@ import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import { resolve } from 'path';
+import { fileURLToPath, URL } from 'node:url';
 
-// const resolve = (dir) => path.resolve(__dirname, dir);
-// https://vitejs.dev/config/
 export default defineConfig({
   base: './',
   resolve: {
-    alias: [
-      {
-        find: '@',
-        replacement: resolve(__dirname, './src'),
-      }
-    ]
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url))
+    }
   },
   plugins: [
     vue(),

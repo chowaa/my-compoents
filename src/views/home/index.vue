@@ -13,7 +13,7 @@ import topBar from '@/views/bar/topBar.vue'
         <el-aside width="200px">
           <LeftBar />
         </el-aside>
-        <el-main>
+        <el-main class="main">
           <router-view></router-view>
         </el-main>
       </el-container>
@@ -26,7 +26,13 @@ import topBar from '@/views/bar/topBar.vue'
   :deep(.el-header){
     padding: 0 ;
     position: sticky;
+    top: 0;
     width: 100%;
+  }
+  .main{
+    padding: 0 ;
+    height: 100%;
+    width: 100vh;
   }
 }
 
