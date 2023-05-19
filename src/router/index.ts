@@ -15,6 +15,11 @@ const routes: Array<RouteRecordRaw> = [
         name:'ShoppingCart',
         component: ()=> import("@/views/shoppingCart/ShoppingCart.vue")
       },
+      {
+        path:'HelloWorld',
+        name:'HelloWorld',
+        component: ()=> import("@/components/HelloWorld.vue")
+      },
     ]
   }
 ]

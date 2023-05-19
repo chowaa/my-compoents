@@ -1,5 +1,7 @@
 <script lang="ts" setup>
 import { reactive } from 'vue';
+// import {Plus} from '@element-plus/icons-vue';
+import {CirclePlusFilled, RemoveFilled} from '@element-plus/icons-vue';
 
 // 商品数据
 const productData = [
@@ -168,29 +170,48 @@ console.log(someValue, strLength);
 
 <template>
   <div class="shopping-cart">
-    <h1>Shopping Cart</h1>
-    <div class="commodity-item" v-for="(item, index) in ProductDataRef" :key="index">
-      <div class="commodity-info title">
-        <span class="name">{{ item.name }}&nbsp;&nbsp;&nbsp;</span>
-        <span class="describe">{{ item.describe }}&nbsp;&nbsp;&nbsp;</span>
-      </div>
-      <div class="prise-button">
-
-        <div class="price">
-          <span>价格：￥{{ item.price }}&nbsp;&nbsp;&nbsp;</span>
+    <el-row>
+      <el-col :span="16">
+        <h1>Shopping Cart</h1>
+        <div class="commodity-item" v-for="(item, index) in ProductDataRef" :key="index">
+          <div class="commodity-info title">
+            <span class="name">{{ item.name }}&nbsp;&nbsp;&nbsp;</span>
+            <span class="describe">{{ item.describe }}&nbsp;&nbsp;&nbsp;</span>
+          </div>
+          <div class="prise-button">
+    
+            <div class="price">
+              <span>价格：￥{{ item.price }}&nbsp;&nbsp;&nbsp;</span>
+            </div>
+    
+            <div class="commodity-button">
+              <div class="icon-button" v-if="cartData.allGoods[index].choose > 0" @click="button(index, 'reduce')">
+                <RemoveFilled size="80" color="rgb(242, 85, 54)"></RemoveFilled>
+              </div>
+              <span>{{ cartData.allGoods[index].choose ? cartData.allGoods[index].choose : 0 }}</span>
+              <div class="icon-button" @click="button(index, 'increase')">
+                <CirclePlusFilled size="80" color="gold"></CirclePlusFilled>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <div class="commodity-button">
-          <el-button v-if="cartData.allGoods[index].choose > 0" @click="button(index, 'reduce')">-</el-button>
-          <span>{{ cartData.allGoods[index].choose ? cartData.allGoods[index].choose : 0 }}</span>
-          <el-button @click="button(index, 'increase')">+</el-button>
-        </div>
-      </div>
-    </div>
-    <p>商品数量：{{ cartData.getTotalNumber() }}</p>
-    <p>起送金额：{{ cartData.upToAmount }}</p>
-    <p>配送费：{{ cartData.deliveryFee }}</p>
-    <p>总价：{{ cartData.getTotalPrice() }}</p>
+        <!-- <p>商品数量：{{ cartData.getTotalNumber() }}</p> -->
+        <el-row class="buttom-box">
+          <el-col :span="6">
+            <el-text class="text">起送金额：{{ cartData.upToAmount }}</el-text>
+          </el-col>
+          <el-col :span="6">
+            <el-text class="text">配送费：{{ cartData.deliveryFee }}</el-text>
+          </el-col>
+          <el-col :span="6">
+            <el-text class="text">总价：{{ cartData.getTotalPrice() }}</el-text>
+          </el-col>
+          <el-col :span="6">
+            <el-button>去结算</el-button>
+          </el-col>
+        </el-row>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -201,14 +222,12 @@ console.log(someValue, strLength);
   padding: 20px;
   box-sizing: border-box;
   text-align: center;
-
   .commodity-item {
     display: flex;
     margin: 5px 0;
     flex-direction: column;
     align-items: flex-start;
-    width: 250px;
-    
+    width: 100%;
     .commodity-info {
       width: 100%;
       display: flex;
@@ -242,7 +261,22 @@ console.log(someValue, strLength);
         span {
           margin: 0 10px;
         }
+        .icon-button{
+          width: 20px;
+          height: 20px;
+          cursor: pointer;
+        }
       }
+    }
+  }
+  .buttom-box{
+    :deep(.el-col-6){
+      display: flex;
+      justify-content: center;
+    }
+    .text{
+      margin-top: 10px;
+      height: 100%;
     }
   }
 }

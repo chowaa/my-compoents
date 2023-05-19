@@ -11,6 +11,7 @@ const count = ref(0)
 
   <div class="card">
     <el-button type="button" @click="count++">count is {{ count }}</el-button>
+    <!-- <el-icon></el-icon> -->
   </div>
 </template>
 

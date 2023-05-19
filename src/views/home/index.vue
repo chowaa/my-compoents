@@ -5,35 +5,25 @@ import topBar from '@/views/bar/topBar.vue'
 
 <template>
   <div class="common-layout">
-    <el-container>
-      <el-header>
-        <topBar />
-      </el-header>
-      <el-container>
-        <el-aside width="200px">
-          <LeftBar />
-        </el-aside>
-        <el-main class="main">
-          <router-view></router-view>
-        </el-main>
-      </el-container>
-    </el-container>
+    <el-header class="handerbar">
+      <topBar />
+    </el-header>
+    <el-aside  class="sidebar">
+      <LeftBar />
+    </el-aside>
+    <el-main class="main">
+      <router-view></router-view>
+    </el-main>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.common-layout{
-  :deep(.el-header){
-    padding: 0 ;
+.common-layout {
+  :deep(.el-header) {
+    padding: 0;
     position: sticky;
     top: 0;
     width: 100%;
   }
-  .main{
-    padding: 0 ;
-    height: 100%;
-    width: 100vh;
-  }
 }
-
 </style>
