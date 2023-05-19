@@ -8,7 +8,22 @@ const productData = [
   { name: '鼠标', price: 100, describe: '这是一个鼠标', },
   { name: '键盘', price: 200, describe: '这是一个键盘', },
   { name: '耳机', price: 300, describe: '这是一个耳机', },
-  { name: '显示屏', price: 400, describe: '这是一个显示屏', }
+  { name: '显示屏', price: 400, describe: '这是一个显示屏', },
+  { name: '主机', price: 500, describe: '这是一个主机', },
+  { name: '内存条', price: 600, describe: '这是一个内存条', },
+  { name: '硬盘', price: 700, describe: '这是一个硬盘', },
+  { name: '显卡', price: 800, describe: '这是一个显卡', },
+  { name: '散热器', price: 900, describe: '这是一个散热器', },
+  { name: '机箱', price: 1000, describe: '这是一个机箱', },
+  { name: '电源', price: 1100, describe: '这是一个电源', },
+  { name: '显示器', price: 1200, describe: '这是一个显示器', },
+  { name: '鼠标垫', price: 1300, describe: '这是一个鼠标垫', },
+  { name: '键盘垫', price: 1400, describe: '这是一个键盘垫', },
+  { name: '鼠标键盘套装', price: 1500, describe: '这是一个鼠标键盘套装', },
+  { name: '键盘鼠标套装', price: 1600, describe: '这是一个键盘鼠标套装', },
+  { name: '键盘鼠标耳机套装', price: 1700, describe: '这是一个键盘鼠标耳机套装', },
+  { name: '键盘鼠标耳机显示屏套装', price: 1800, describe: '这是一个键盘鼠标耳机显示屏套装', },
+  { name: '键盘鼠标耳机显示屏主机套装', price: 1900, describe: '这是一个键盘鼠标耳机显示屏主', },
 ];
 
 // 商品数据类型
@@ -171,45 +186,45 @@ console.log(someValue, strLength);
 <template>
   <div class="shopping-cart">
     <el-row>
-      <el-col :span="16">
+      <el-col :span="16" :xs="24">
         <h1>Shopping Cart</h1>
-        <div class="commodity-item" v-for="(item, index) in ProductDataRef" :key="index">
-          <div class="commodity-info title">
-            <span class="name">{{ item.name }}&nbsp;&nbsp;&nbsp;</span>
-            <span class="describe">{{ item.describe }}&nbsp;&nbsp;&nbsp;</span>
-          </div>
-          <div class="prise-button">
-    
-            <div class="price">
-              <span>价格：￥{{ item.price }}&nbsp;&nbsp;&nbsp;</span>
+        <div class="shopping-box">
+          <div class="commodity-item" v-for="(item, index) in ProductDataRef" :key="index">
+            <div class="commodity-info title">
+              <span class="name">{{ item.name }}&nbsp;&nbsp;&nbsp;</span>
+              <span class="describe">{{ item.describe }}&nbsp;&nbsp;&nbsp;</span>
             </div>
-    
-            <div class="commodity-button">
-              <div class="icon-button" v-if="cartData.allGoods[index].choose > 0" @click="button(index, 'reduce')">
-                <RemoveFilled size="80" color="rgb(242, 85, 54)"></RemoveFilled>
+            <div class="prise-button">
+              <div class="price">
+                <span>价格：￥{{ item.price }}&nbsp;&nbsp;&nbsp;</span>
               </div>
-              <span>{{ cartData.allGoods[index].choose ? cartData.allGoods[index].choose : 0 }}</span>
-              <div class="icon-button" @click="button(index, 'increase')">
-                <CirclePlusFilled size="80" color="gold"></CirclePlusFilled>
+              <div class="commodity-button">
+                <div class="icon-button" v-if="cartData.allGoods[index].choose > 0" @click="button(index, 'reduce')">
+                  <RemoveFilled size="80" color="rgb(242, 85, 54)"></RemoveFilled>
+                </div>
+                <span>{{ cartData.allGoods[index].choose ? cartData.allGoods[index].choose : 0 }}</span>
+                <div class="icon-button" @click="button(index, 'increase')">
+                  <CirclePlusFilled size="80" color="gold"></CirclePlusFilled>
+                </div>
               </div>
             </div>
           </div>
+          <!-- <p>商品数量：{{ cartData.getTotalNumber() }}</p> -->
+          <el-row class="buttom-box">
+            <el-col :span="6">
+              <el-text class="text">起送费：{{ cartData.upToAmount }}</el-text>
+            </el-col>
+            <el-col :span="6">
+              <el-text class="text">配送费：{{ cartData.deliveryFee }}</el-text>
+            </el-col>
+            <el-col :span="6">
+              <el-text class="text">总价：{{ cartData.getTotalPrice() }}</el-text>
+            </el-col>
+            <el-col :span="6">
+              <el-button>去结算</el-button>
+            </el-col>
+          </el-row>
         </div>
-        <!-- <p>商品数量：{{ cartData.getTotalNumber() }}</p> -->
-        <el-row class="buttom-box">
-          <el-col :span="6">
-            <el-text class="text">起送金额：{{ cartData.upToAmount }}</el-text>
-          </el-col>
-          <el-col :span="6">
-            <el-text class="text">配送费：{{ cartData.deliveryFee }}</el-text>
-          </el-col>
-          <el-col :span="6">
-            <el-text class="text">总价：{{ cartData.getTotalPrice() }}</el-text>
-          </el-col>
-          <el-col :span="6">
-            <el-button>去结算</el-button>
-          </el-col>
-        </el-row>
       </el-col>
     </el-row>
   </div>
@@ -224,10 +239,10 @@ console.log(someValue, strLength);
   text-align: center;
   .commodity-item {
     display: flex;
-    margin: 5px 0;
+    margin: 5px auto;
     flex-direction: column;
     align-items: flex-start;
-    width: 100%;
+    width: 300px;
     .commodity-info {
       width: 100%;
       display: flex;
@@ -270,6 +285,12 @@ console.log(someValue, strLength);
     }
   }
   .buttom-box{
+    margin: 5px auto;
+    background-color: burlywood;
+    width: 300px;
+    // position: fixed;
+    bottom: 0;
+    // left: calc((98% - 300px)/2);
     :deep(.el-col-6){
       display: flex;
       justify-content: center;

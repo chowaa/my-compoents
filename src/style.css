@@ -1,15 +1,18 @@
 :root {
   --vp-screen-max-width: 1482px;
   --vp-sidebar-width-small: 290px;
+  --border-color: #4c4d4f;
+  --header-height: 55px;
+  --bg-color: #242424;
+  --text-color:#ffffff;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   margin: 0;
   padding: 0;
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  color: var(--text-color);
   background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -18,7 +21,10 @@
 }
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
+    --bg-color: #ffffff;
+    --border-color: #dcdfe6;
+    --header-height: 55px;
+    --text-color:#000000;
     background-color: #ffffff;
   }
   a:hover {
@@ -67,6 +73,23 @@
 }
 .handerbar{
   z-index: 999;
+  padding: 0;
+  position: sticky;
+  top: 0;
+  width: 100%;
+}
+.topBar {
+  width: 100%;
+  text-align: center;
+  line-height: 50px;
+  border-bottom: 1px solid var(--border-color);
+  height: var(--header-height);
+  padding: 0 12px 0 24px;
+  background-image: radial-gradient(transparent 1px, var(--bg-color) 1px);
+  background-size: 4px 4px;
+  backdrop-filter: saturate(50%) blur(10px);
+  -webkit-backdrop-filter: saturate(50%) blur(4px);
+  box-sizing: border-box;
 }
 .sidebar {
   position: fixed;

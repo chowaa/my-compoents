@@ -20,6 +20,11 @@ const routes: Array<RouteRecordRaw> = [
         name:'HelloWorld',
         component: ()=> import("@/components/HelloWorld.vue")
       },
+      {
+        path:'DragAndDrop',
+        name:'DragAndDrop',
+        component: ()=> import("@/views/dragAndDrop/DragAndDrop.vue")
+      },
     ]
   }
 ]

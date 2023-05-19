@@ -18,12 +18,5 @@ import topBar from '@/views/bar/topBar.vue'
 </template>
 
 <style lang="scss" scoped>
-.common-layout {
-  :deep(.el-header) {
-    padding: 0;
-    position: sticky;
-    top: 0;
-    width: 100%;
-  }
-}
+
 </style>
