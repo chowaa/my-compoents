@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import router from '@/router';
 
 const isActive = ref( 0 );
-
+router.push('/ShoppingCart')
 const routerTo = (item: any) => {
   isActive.value = item.index - 1
   router.push(item.path)
