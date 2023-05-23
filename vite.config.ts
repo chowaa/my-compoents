@@ -23,7 +23,7 @@ export default defineConfig({
     }),
   ],
   server: {
-    port: 8080,
+    port: 8088,
   },
   build: {
     //打包环境移除console.log，debugger

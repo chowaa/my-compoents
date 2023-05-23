@@ -17,8 +17,9 @@ class DragItem {
   }
   // 拖拽开始
   dragStart( event:DragEvent, item: any, index: number) {
-    event.dataTransfer.effectAllowed = 'move';
-    console.log(event.dataTransfer.effectAllowed, 'effectAllowed');
+    if(event.dataTransfer){
+      event.dataTransfer.effectAllowed = 'move';
+    }
     this.start = index;
     console.log(item, index)
     console.log(event,'dragStart');
@@ -26,30 +27,29 @@ class DragItem {
   // 拖拽中
   dragOver( event:DragEvent, item: any, index: number ){
     event.preventDefault();
-    // console.log(event,'dragOver');
-    // console.log(item, index);
+    console.log(event,'dragOver');
+    console.log(item, index);
 
   }
   // 拖拽结束
   dragEnd( event:DragEvent, item: any, index: number ) {
     // 获取目标元素
     const target = event.target as HTMLElement;
-    // console.log(target, 'target');
-    // console.log(event,'dragEnd');
-    // console.log(item, index);
+    console.log(target, 'target');
+    console.log(event,'dragEnd');
+    console.log(item, index);
   }
   // 拖拽进入
   dragEnter( event:DragEvent, index: number, item?: any ) {
+    if(item||index){}
     // 获取目标元素
     const target = event.target as HTMLElement;
     if (target.classList.contains('dragAndDrop__left__content__item')) {
-      const moveItem = leftData[this.start];
-      // leftData.splice(this.start, 1);
-      // leftData.splice(index, 0, moveItem); 
     }
   }
   // 拖拽放手
   dragDrop( event:DragEvent, item: any, index: number ) {
+    if(item){}
     const target = event.target as HTMLElement;
     if (target.classList.contains('dragAndDrop__left__content__item')) {
       const moveItem = leftData[this.start];
@@ -129,6 +129,9 @@ const leftData = reactive([
     .dragAndDrop__left__content{
       display: flex;
       flex-direction: column;
+      .drag-move {
+        transition: transform 0.3s;
+      }
       .dragAndDrop__left__content__item{
         background-color:antiquewhite;
       }

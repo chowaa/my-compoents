@@ -73,7 +73,7 @@
 }
 .handerbar{
   z-index: 999;
-  padding: 0;
+  padding: 0 !important;
   position: sticky;
   top: 0;
   width: 100%;
