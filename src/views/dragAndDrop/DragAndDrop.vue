@@ -112,10 +112,11 @@ const leftData = reactive([
   <div class="dragAndDrop">
     <el-row>
       <el-col :span="16" :xs="24">
+        <h1>DragAndDrop</h1>
         <el-row>
           <el-col :span="6">
             <div class="dragAndDrop__left">
-              <!-- <div class="dragAndDrop__left__title">左侧</div> -->
+              <div class="dragAndDrop__left__title">这里是可以拖动的</div>
               <div class="dragAndDrop__left__content dragItem">
                 <div class="dragAndDrop__left__content__item dragAndDrop__box" v-for="(item, index) in leftData"
                   :key="item.name" :draggable="true" 
@@ -130,7 +131,7 @@ const leftData = reactive([
             </div>
           </el-col>
           <el-col :span="18">
-            <div class="dragAndDrop__right">
+            <div class="dragAndDrop__right clone">
               <div class="dragAndDrop__right__content">
                 <div class="dragAndDrop__right__content__item bg dragAndDrop__box" v-for="index in 9" :key="index"
                   @dragend="dragItem.dragEnd($event, index)"

@@ -14,26 +14,36 @@ const iconUrls = [
 </script>
 
 <template>
-  <el-row class="topBar" :gutter="20">
+  <!-- <el-row class="topBar" :gutter="20">
     <el-col :span="3"></el-col>
-    <el-col :span="18">
-      <el-row>
-        <el-col :span="12" class="topBar_left topBar_flex">
-          <el-avatar shape="square" size="" :src="squareUrl" />
-          <el-text class="mx-1" tag="b" size="large">chowaa</el-text>
-        </el-col>
-        <el-col :span="12" class="topBar_right topBar_flex">
-          <a v-for="(item, index) in iconUrls" class="topBar_flex" :href="item.link" :key="index">
-            <img class="git_img" :src="item.url"/>
-          </a>
-        </el-col>
-      </el-row>
-    </el-col>
+    <el-col :span="18"> -->
+      <div class="topBar">
+        <div class="topBar_center">
+
+          <el-row>
+            <el-col :span="12" class="topBar_left topBar_flex">
+              <el-avatar shape="square" size="" :src="squareUrl" />
+              <el-text class="mx-1" tag="b" size="large">chowaa</el-text>
+            </el-col>
+            <el-col :span="12" class="topBar_right topBar_flex">
+              <a v-for="(item, index) in iconUrls" class="topBar_flex" :href="item.link" :key="index">
+                <img class="git_img" :src="item.url"/>
+              </a>
+            </el-col>
+          </el-row>
+        </div>
+
+      </div>
+    <!-- </el-col>
     <el-col :span="3"></el-col>
-  </el-row>
+  </el-row> -->
 </template>
 
 <style lang="scss" scoped>
+.topBar_center{
+  max-width: calc(var(--vp-screen-max-width));
+  margin: 0 auto;
+}
 .topBar_flex{
   display: flex;
   align-items: center;
