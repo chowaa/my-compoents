@@ -29,7 +29,9 @@ class DragItem {
   dragOver(event: DragEvent, index: number, item?: any) {
     if (index || event || item) { }
     // 阻止默认事件
-    event.preventDefault();
+    if(this.startEl !== null) {
+      event.preventDefault();
+    }
   }
 
   // 拖拽进入
