@@ -45,8 +45,6 @@ class DragItem {
       // 右侧拖拽
       target.classList.add('dragAndDrop__right__content__item--active');
       // 设置进入元素
-      event.dataTransfer?.dropEffect;
-      event.preventDefault();
       this.dragEnterEl  = target;
       // 当前为右侧拖拽，设置标识符
       this.flag = true;
