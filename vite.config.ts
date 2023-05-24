@@ -14,13 +14,13 @@ export default defineConfig({
     }
   },
   plugins: [
-    vue(),
     AutoImport({
       resolvers: [ElementPlusResolver()],
     }),
     Components({
       resolvers: [ElementPlusResolver()],
     }),
+    vue(),
   ],
   server: {
     port: 8088,
@@ -37,7 +37,7 @@ export default defineConfig({
     //打包文件按照类型分文件夹显示
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'src/index.html'),
+        main: resolve(__dirname, './index.html'),
       },
       output: {
         chunkFileNames: 'js/[name]-[hash].js',
