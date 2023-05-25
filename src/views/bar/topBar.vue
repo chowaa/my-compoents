@@ -2,6 +2,7 @@
 const squareUrl =  new URL(`@/assets/imgs/headPortrait.jpg`, import.meta.url).href
 
 const iconUrls = [
+  { url: new URL(`@/assets/svgs/csdn.svg`, import.meta.url).href, link:'https://blog.csdn.net/Chow_yi'},
   { url: new URL(`@/assets/svgs/vite.svg`, import.meta.url).href, link:'https://cn.vitejs.dev/'},
   { url: new URL(`@/assets/svgs/webpack.svg`, import.meta.url).href, link:'https://webpack.docschina.org/'},
   { url: new URL(`@/assets/svgs/vue.svg`, import.meta.url).href, link:'https://cn.vuejs.org/guide/quick-start.html#creating-a-vue-application'},
