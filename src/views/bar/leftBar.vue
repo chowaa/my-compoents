@@ -5,7 +5,9 @@ import router from '@/router';
 const leftBarData = [
   { index: 1, title: 'ShoppingCart', icon: 'el-icon-location', path: '/ShoppingCart' },
   { index: 2, title: 'HelloWorld', icon: 'el-icon-menu', path: '/HelloWorld' },
-  { index: 3, title: 'DragAndDrop', icon: 'el-icon-setting', path: '/DragAndDrop' }
+  { index: 3, title: 'DragAndDrop', icon: 'el-icon-setting', path: '/DragAndDrop' },
+  { index: 4, title: 'Slider', icon: 'el-icon-setting', path: '/Slider' },
+  { index: 5, title: 'QphysicalButton', icon: 'el-icon-setting', path: '/QphysicalButton' },
   // { index: '3', title: 'Navigator Three', icon: 'el-icon-setting', path: '/home'}
 ]
 const isActive = ref( 0 );

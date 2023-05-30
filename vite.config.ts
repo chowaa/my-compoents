@@ -6,6 +6,8 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import { resolve } from 'path';
 import { fileURLToPath, URL } from 'node:url';
 
+const base = process.cwd();
+
 export default defineConfig({
   base: './',
   resolve: {
@@ -15,10 +17,28 @@ export default defineConfig({
   },
   plugins: [
     AutoImport({
-      resolvers: [ElementPlusResolver()],
+      imports: ['vue', 'vue-router'],
+      include: [
+        /\.[tj]sx?$/,
+        /\.vue$/,
+        /\.vue\?vue/,
+      ],
+      resolvers: [
+        ElementPlusResolver({importStyle: false}),
+        // IconsResolver({})
+      ],
+      vueTemplate: true, // 是否在 vue 模板中自动导入
+      dts: resolve(base,  'auto-imports.d.ts') // (false) 配置文件生成位置，默认是根目录 /auto-imports.d.ts
     }),
     Components({
-      resolvers: [ElementPlusResolver()],
+      include: [
+        /\.[tj]sx?$/,
+        /\.vue$/,
+        /\.vue\?vue/,
+      ],
+      dirs: ['src/components', 'src/**/components',],
+      resolvers: [ElementPlusResolver({importStyle: false})],
+      dts: resolve(base,  'components.d.ts')
     }),
     vue(),
   ],

@@ -25,6 +25,16 @@ const routes: Array<RouteRecordRaw> = [
         name:'DragAndDrop',
         component: ()=> import("@/views/dragAndDrop/DragAndDrop.vue")
       },
+      {
+        path:'Slider',
+        name:'Slider',
+        component: ()=> import("@/views/slider/Slider.vue")
+      },
+      {
+        path:'QphysicalButton',
+        name:'QphysicalButton',
+        component: ()=> import("@/views/qphysicalButton/QphysicalButton.vue")
+      },
     ]
   }
 ]
