@@ -1,61 +1,61 @@
 <script lang="ts" setup>
 import { reactive } from 'vue'
 
-//拖拽对象
-class DragItem {
-  start: number = 0; // 开始位置
-  end: number = 0; // 结束位置
-  startEl: Element | null = null; // 开始元素
-  dragEnterEl: Element | null = null; // 进入元素
-  flag: boolean = false;
-  constructor() {
-  
+// 拖动启动数据
+class DragStartData {
+  public index: number;
+  public item: any;
+  constructor(index: number, item: any) {
+    this.index = index;
+    this.item = item;
   }
+}
+
+// 拖拽事件
+class DragItem {
+  public start: number = 0;
+  public end: number = 0;
+  public startEl: Element | null = null;
+  public dragEnterEl: Element | null = null;
+  public flag: boolean = false;
 
   // 拖拽开始
-  dragStart(event: DragEvent, index: number, item?: any) {
+  public dragStart(event: DragEvent, index: number, item?: any) {
     if (index || event || item) { }
     if (event.dataTransfer) {
       event.dataTransfer.effectAllowed = 'move';
     }
     const target = event.target as HTMLElement;
-    // 设置开始元素
-    this.startEl = target
-    // 设置开始位置
+    this.startEl = target;
     this.start = index;
   }
 
   // 拖拽中
-  dragOver(event: DragEvent, index: number, item?: any) {
+  public dragOver(event: DragEvent, index: number, item?: any) {
     if (index || event || item) { }
-    // 阻止默认事件
-    if(this.startEl !== null) {
+    if (this.startEl !== null) {
       event.preventDefault();
     }
   }
 
   // 拖拽进入
-  dragEnter(event: DragEvent, index: number, item?: any) {
+  public dragEnter(event: DragEvent, index: number, item?: any) {
     if (index || event || item) { }
     this.flag = false;
-    this.dragEnterEl = null
-    this.clearStyle()
+    this.dragEnterEl = null;
+    this.clearStyle();
     const target = event.target as HTMLElement;
-    if(item === 'right' && this.startEl !== null) {
-      // 右侧拖拽
+    if (item === 'right' && this.startEl !== null) {
       target.classList.add('dragAndDrop__right__content__item--active');
-      // 设置进入元素
-      this.dragEnterEl  = target;
-      // 当前为右侧拖拽，设置标识符
+      this.dragEnterEl = target;
       this.flag = true;
     } else {
-      // 左侧拖拽
       this.end = index;
     }
   }
 
-  // 拖拽放手
-  dragDrop(event: DragEvent, index: number, item?: any) {
+  // 拖拽离开
+  public dragDrop(event: DragEvent, index: number, leftData: any[], item?: any) {
     if (index || event || item) { }
     const moveItem = leftData[this.start];
     leftData.splice(this.start, 1);
@@ -63,15 +63,13 @@ class DragItem {
   }
 
   // 拖拽结束
-  dragEnd(event: DragEvent, index: number, item?: any) {
+  public dragEnd(event: DragEvent, index: number, item?: any) {
     if (index || event || item) { }
     this.clearStyle();
-    if (this.flag === true) { 
+    if (this.flag === true) {
       this.clearChild(this.dragEnterEl as Element);
-
-      // 当初始元素和进入元素都存在时，将开始元素克隆到进入元素中
-      if(this.startEl && this.dragEnterEl){
-        const cloned:any = this.startEl.cloneNode(true);
+      if (this.startEl && this.dragEnterEl) {
+        const cloned: any = this.startEl.cloneNode(true);
         this.clearEvent(cloned);
         cloned.classList.add('noDrag')
         this.dragEnterEl.appendChild(cloned);
@@ -80,23 +78,23 @@ class DragItem {
     this.reset()
   }
 
-  // 清除元素中的事件和样式
-  clearEvent(el: Element) {
+  // 清除事件
+  private clearEvent(el: Element) {
     const cloneEl = el.cloneNode(true);
     if (el.parentNode) {
       el.parentNode.replaceChild(cloneEl, el);
     }
   }
 
-  // 清除元素子元素
-  clearChild(el: Element) {
+  // 清除子元素
+  private clearChild(el: Element) {
     while (el.firstChild) {
       el.removeChild(el.firstChild);
     }
   }
-
-  // 恢复默认值
-  reset() {
+  
+  // 重置数据
+  private reset() {
     this.start = 0;
     this.end = 0;
     this.startEl = null;
@@ -105,10 +103,41 @@ class DragItem {
   }
 
   // 清除样式
-  clearStyle() {
+  private clearStyle() {
     document.querySelectorAll('.dragAndDrop__right__content__item').forEach((item) => {
       item.classList.remove('dragAndDrop__right__content__item--active');
     })
+  }
+}
+
+class DragAndDrop {
+  private leftData: any[];
+  private dragItem: DragItem;
+
+  constructor(leftData: any[]) {
+    this.leftData = leftData;
+    this.dragItem = new DragItem();
+  }
+
+  public handleDragStart(event: DragEvent, index: number, item?: any) {
+    const dragStartData = new DragStartData(index, item);
+    this.dragItem.dragStart(event, dragStartData.index, dragStartData.item);
+  }
+
+  public handleDragOver(event: DragEvent, index: number, item?: any) {
+    this.dragItem.dragOver(event, index, item);
+  }
+
+  public handleDragEnter(event: DragEvent, index: number, item?: any) {
+    this.dragItem.dragEnter(event, index, item);
+  }
+
+  public handleDragDrop(event: DragEvent, index: number, item?: any) {
+    this.dragItem.dragDrop(event, index, this.leftData, item);
+  }
+
+  public handleDragEnd(event: DragEvent, index: number, item?: any) {
+    this.dragItem.dragEnd(event, index, item);
   }
 }
 
@@ -125,7 +154,7 @@ const leftData = reactive([
   { name: 'ECMOSCRPIT' },
   { name: 'AXIOS' }
 ])
-const dragItem = new DragItem();
+const myDgAndDp:DragAndDrop = new DragAndDrop(leftData);
 </script>
 
 <template>
@@ -140,11 +169,11 @@ const dragItem = new DragItem();
               <div class="dragAndDrop__left__content dragItem">
                 <div class="dragAndDrop__left__content__item dragAndDrop__box" v-for="(item, index) in leftData"
                   :key="item.name" :draggable="true" 
-                  @dragstart="dragItem.dragStart($event, index, item)"
-                  @dragenter="dragItem.dragEnter($event, index, item)" 
-                  @dragend="dragItem.dragEnd($event, index, item)"
-                  @dragover="dragItem.dragOver($event, index, item)" 
-                  @drop="dragItem.dragDrop($event, index, item)"
+                  @dragstart="myDgAndDp.handleDragStart($event, index, item)"
+                  @dragenter="myDgAndDp.handleDragEnter($event, index, item)" 
+                  @dragend="myDgAndDp.handleDragEnd($event, index, item)"
+                  @dragover="myDgAndDp.handleDragOver($event, index, item)" 
+                  @drop="myDgAndDp.handleDragDrop($event, index, item)"
                   >
                   {{ item.name }}
                 </div>
@@ -155,8 +184,8 @@ const dragItem = new DragItem();
             <div class="dragAndDrop__right clone">
               <div class="dragAndDrop__right__content">
                 <div class="dragAndDrop__right__content__item bg dragAndDrop__box noDrag" v-for="index in 9" :key="index"
-                  @dragenter="dragItem.dragEnter($event, index, 'right')"
-                  @dragover="dragItem.dragOver($event, index)"
+                  @dragenter="myDgAndDp.handleDragEnter($event, index, 'right')"
+                  @dragover="myDgAndDp.handleDragOver($event, index)"
                   >
                   <!-- {{ dragItem.name }} -->
                 </div>

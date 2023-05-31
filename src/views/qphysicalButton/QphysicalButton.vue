@@ -16,21 +16,21 @@ const keypad = [
   { key: 'enter', value: 'enter' },
 ]
 //运算符
-class operator {
-  a: number = 0;
-  b: number = 0;
-  constructor(){
-    this.plus = this.plus.bind(this)
-    this.minus = this.minus.bind(this)
-  }
-  plus(a: number, b: number){
-    return a + b
-  }
-  minus(a: number, b: number){
-    return a - b
-  }
-}
-const op = new operator()
+// class operator {
+//   a: number = 0;
+//   b: number = 0;
+//   constructor(){
+//     this.plus = this.plus.bind(this)
+//     this.minus = this.minus.bind(this)
+//   }
+//   plus(a: number, b: number){
+//     return a + b
+//   }
+//   minus(a: number, b: number){
+//     return a - b
+//   }
+// }
+// const op = new operator()
 </script>
 
 <template>
@@ -40,7 +40,7 @@ const op = new operator()
         <h1>QphysicalButton</h1>
         <div class="view_box"></div>
         <div class="keypad_box">
-          <button class="QHButton" v-for="(item, index) in keypad" :key="item.key">
+          <button class="QHButton" v-for="item in keypad" :key="item.key">
             {{ item.key }}
           </button>
         </div>
