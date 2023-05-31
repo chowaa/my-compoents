@@ -33,10 +33,8 @@ class DragItem {
       // 设置允许的拖拽效果为 "move"
       event.dataTransfer.effectAllowed = 'move';
     }
-    // 获取事件目标元素，并将其类型转换为 HTMLElement
-    const target = event.target as HTMLElement;
-    // 将目标元素赋值给 startEl
-    this.startEl = target;
+    // 获取事件目标元素，并将其类型转换为 HTMLElement,将目标元素赋值给 startEl
+    this.startEl = event.target as HTMLElement;
     // 将传入的索引值赋值给 start
     this.start = index;
   }
@@ -90,7 +88,7 @@ class DragItem {
 
   // 拖拽离开方法
   /**
-   * 
+   *
    * @param event 拖拽元素
    * @param index 拖拽元素索引
    * @param leftData 原始数据
@@ -120,7 +118,7 @@ class DragItem {
     // 清除样式
     this.clearStyle();
     // 如果 flag 为 true，表示拖拽元素进入了目标元素
-    if (this.flag === true) {
+    if (this.flag) {
       // 清除目标元素的子元素
       this.clearChild(this.dragEnterEl as Element);
       // 如果开始拖拽的元素和目标元素都存在
@@ -161,7 +159,7 @@ class DragItem {
       el.removeChild(el.firstChild);
     }
   }
-  
+
   // 重置数据方法
   private reset() :void {
     this.start = 0;
@@ -181,7 +179,7 @@ class DragItem {
 
 // 定义拖拽类
 class DragAndDrop {
-  private leftData: any[];// 左侧数据
+  readonly leftData: any[];// 左侧数据
   private dragItem: DragItem;// 拖拽元素
 
   constructor(leftData: any[]) {
@@ -249,13 +247,15 @@ class DragAndDrop {
 // 定义可拖拽数据
 const leftData = reactive([
   { name: 'CSS' },
+  { name: 'LESS' },
+  { name: 'SASS' },
   { name: 'JAVASCRIPT' },
   { name: 'VUE' },
   { name: 'TYPESCRIPT' },
   { name: 'REACT' },
   { name: 'NODEJS' },
   { name: 'HTML' },
-  { name: 'ECMOSCRPIT' },
+  { name: 'ECMASCRPIT' },
   { name: 'AXIOS' }
 ])
 const myDgAndDp:DragAndDrop = new DragAndDrop(leftData);
@@ -274,11 +274,11 @@ const myDgAndDp:DragAndDrop = new DragAndDrop(leftData);
               <div class="dragAndDrop__left__title">这里是可以拖动的</div>
               <div class="dragAndDrop__left__content dragItem">
                 <div class="dragAndDrop__left__content__item dragAndDrop__box" v-for="(item, index) in leftData"
-                  :key="item.name" :draggable="true" 
+                  :key="item.name" :draggable="true"
                   @dragstart="myDgAndDp.handleDragStart($event, index, item)"
-                  @dragenter="myDgAndDp.handleDragEnter($event, index, item)" 
+                  @dragenter="myDgAndDp.handleDragEnter($event, index, item)"
                   @dragend="myDgAndDp.handleDragEnd($event, index, item)"
-                  @dragover="myDgAndDp.handleDragOver($event, index, item)" 
+                  @dragover="myDgAndDp.handleDragOver($event, index, item)"
                   @drop="myDgAndDp.handleDragDrop($event, index, item)"
                   >
                   {{ item.name }}
