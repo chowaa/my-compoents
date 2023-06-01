@@ -19,8 +19,8 @@ class DragItem {
   private dragEnterEl: Element | null = null;// 拖拽进入元素
   private flag: boolean = false;// 是否拖拽进入元素
 
-  // 拖拽开始方法
   /**
+   * @description 拖拽开始方法
    * @param event 拖拽事件
    * @param index 拖拽元素索引
    * @param item 拖拽元素数据
@@ -39,8 +39,8 @@ class DragItem {
     this.start = index;
   }
 
-  // 拖拽过程中方法
   /**
+   * @description 拖拽过程中方法
    * @param event 拖拽事件
    * @param index 拖拽元素索引
    * @param item 拖拽元素数据
@@ -55,8 +55,8 @@ class DragItem {
     }
   }
 
-  // 拖拽进入方法
   /**
+   * @description 拖拽进入方法
    * @param event 拖拽事件
    * @param index 拖拽元素索引
    * @param item 拖拽元素数据
@@ -86,9 +86,8 @@ class DragItem {
     }
   }
 
-  // 拖拽离开方法
   /**
-   *
+   * @description 拖拽离开方法
    * @param event 拖拽元素
    * @param index 拖拽元素索引
    * @param leftData 原始数据
@@ -106,8 +105,8 @@ class DragItem {
     }
   }
 
-  // 拖拽结束方法
   /**
+   * @description 拖拽结束方法
    * @param event 拖拽事件
    * @param index 拖拽元素索引
    * @param item 拖拽元素数据
@@ -137,8 +136,8 @@ class DragItem {
     this.reset()
   }
 
-  // 清除事件方法
   /**
+   * @description 清除事件方法
    * @param el 需要清除事件的元素
    * @returns void
    */
@@ -149,8 +148,8 @@ class DragItem {
     }
   }
 
-  // 清除子元素方法
   /**
+   * @description 清除子元素方法
    * @param el 需要清除子元素的元素
    * @returns void
    */
@@ -187,8 +186,8 @@ class DragAndDrop {
     this.dragItem = new DragItem();
   }
 
-  // 处理拖拽开始方法
   /**
+   * @description 拖拽开始方法
    * @param event 拖拽事件
    * @param index 拖拽元素索引
    * @param item 拖拽元素数据
@@ -199,8 +198,8 @@ class DragAndDrop {
     this.dragItem.dragStart(event, dragStartData.index, dragStartData.item);
   }
 
-  // 处理拖拽过程中方法
   /**
+   * @description 拖拽过程中方法
    * @param event 拖拽事件
    * @param index 拖拽元素索引
    * @param item 拖拽元素数据
@@ -210,8 +209,8 @@ class DragAndDrop {
     this.dragItem.dragOver(event, index, item);
   }
 
-  // 处理拖拽进入方法
   /**
+   * @description 拖拽进入方法
    * @param event 拖拽事件
    * @param index 拖拽元素索引
    * @param item 拖拽元素数据
@@ -221,8 +220,8 @@ class DragAndDrop {
     this.dragItem.dragEnter(event, index, item);
   }
 
-  // 处理拖拽离开方法
   /**
+   * @description 拖拽离开方法
    * @param event 拖拽事件
    * @param index 拖拽元素索引
    * @param item 拖拽元素数据
@@ -232,8 +231,8 @@ class DragAndDrop {
     this.dragItem.dragDrop(event, index, this.leftData, item);
   }
 
-  // 处理拖拽结束方法
   /**
+   * @description 拖拽结束方法
    * @param event 拖拽事件
    * @param index 拖拽元素索引
    * @param item 拖拽元素数据
